@@ -1,0 +1,13 @@
+export const FETCH_POSTS = 'fetch_posts';
+export const FETCH_POST = 'fetch_post';
+export const FETCH_ALL_CATEGORY = 'fetch_all_category';
+export const FETCH_BY_CATEGORY = 'fetch_by_category';
+export const CREATE_POST = 'create_post';
+export const EDIT_POST = 'edit_post';
+export const DELETE_POST = 'delete_post'
+export const UP_VOTE = "up_vote";
+export const DOWN_VOTE = "down_vote";
+export const FETCH_COMMENT = "fetch_comment"
+export const FETCH_COMMENTS = "fetch_comments";
+export const FETCH_POST_EDIT = "fetch_post_edit";
+export const COMMENT_UP_VOTE = "comment_up_vote";

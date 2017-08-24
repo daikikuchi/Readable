@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link,withRouter} from 'react-router-dom';
-import { getComments,getComment,upVoteComment} from '../actions';
+import { getComments,getComment,voteComment} from '../actions';
 
 class Comments extends Component {
   // componentDidMount() {
@@ -26,8 +26,8 @@ class Comments extends Component {
 
             <li>{formatted}</li>
            <li><span className="glyphicon glyphicon-star-empty"></span> {voteScore}</li>
-           <li onClick={() => this.props.upVoteComment(id)}><span className="glyphicon glyphicon glyphicon-thumbs-up cursor"></span></li>
-           <li onClick={() => null}><span className="glyphicon glyphicon glyphicon-thumbs-down cursor"></span></li>
+           <li onClick={() => this.props.voteComment(id,'upVote')}><span className="glyphicon glyphicon glyphicon-thumbs-up cursor"></span></li>
+           <li onClick={() => this.props.voteComment(id,'downVote')}><span className="glyphicon glyphicon glyphicon-thumbs-down cursor"></span></li>
            <li onClick={() => null}><span className="glyphicon glyphicon-remove-sign cursor"></span></li>
          </ul>
        </div>
@@ -69,4 +69,4 @@ function mapStateToProps({ comments },ownProps) {
   return { selectedComments  }
 };
 
-export default withRouter(connect(mapStateToProps, {getComments,getComment,upVoteComment})(Comments));
+export default withRouter(connect(mapStateToProps, {getComments,getComment,voteComment})(Comments));

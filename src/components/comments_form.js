@@ -2,24 +2,23 @@ import React, { Component } from 'react';
 import { Field, reduxForm, initialize} from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createPost, editPost, fetchPostEdit } from '../actions'
+import { createComment, fetchPostEdit } from '../actions'
 
 
-class PostsForm extends Component {
-  componentDidMount() {
-        if(this.props.posts) {
-        const { id }  = this.props.match.params;
-        this.props.fetchPostEdit(id).then(() => {
-          this.handleInitialize();
-        })
-  }
-}
+class CommentsForm extends Component {
+//   componentDidMount() {
+//         if(this.props.posts) {
+//         const { id }  = this.props.match.params;
+//         this.props.fetchPostEdit(id).then(() => {
+//           this.handleInitialize();
+//         })
+//   }
+// }
 
   handleInitialize() {
 
   const initData = {
     "title": this.props.posts.title,
-    "category": this.props.posts.category,
     "author": this.props.posts.author,
     "body": this.props.posts.body,
   };
@@ -51,7 +50,7 @@ class PostsForm extends Component {
 
 
     onSubmit(values) {
-      const { id }=this.props.match.params
+      const { id }=this.props.id
       if(id){
         values['timestamp'] = new Date()
         this.props.editPost(id,values,() => {
@@ -59,10 +58,9 @@ class PostsForm extends Component {
         });
       }
       else{
-      values['id'] = Math.random().toString(36).substr(-8)
       values['timestamp'] = new Date()
-      this.props.createPost(values, () => {
-          this.props.history.push('/');
+      this.props.createComment(id,values,()=> {
+          null;
       });
     }
     }
@@ -76,15 +74,8 @@ class PostsForm extends Component {
 
      return(
        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-         <h5 className="bold">Category</h5>
-         <Field label="Category" name="category" component="select">
-           <option disabled></option>
-           <option value="react">React</option>
-           <option value="redux">Redux</option>
-           <option value="udacity">Udacity</option>
-         </Field>
           <Field
-            label="Title For Post"
+            label="Title"
             name="title"
             type="input"
             component={this.renderField}
@@ -97,13 +88,12 @@ class PostsForm extends Component {
             component={this.renderField}
           />
           <Field
-            label="Post Content"
+            label="Comments"
             name = "body"
             type="textarea"
             component={this.renderField}
           />
-          <button type="submit" className="btn btn-primary submit">Submit</button>
-          <Link to="/" className="btn btn-danger">Cancell</Link>
+          <button type="submit" className="btn btn-primary submit sumbmi-comment">Submit</button>
        </form>
      );
    }
@@ -119,9 +109,6 @@ function validate(values) {
  if(!values.author) {
    errors.author = 'Enter an author'
  }
- if(!values.category) {
-   errors.category = "Enter an category"
- }
 if(!values.body) {
   errors.body = 'Enter some content please'
 }
@@ -132,13 +119,11 @@ if(!values.body) {
 }
 
 
-function mapStateToProps({ posts }) {
-  return { posts }
-};
+
 
 export default reduxForm({
    validate,
-   form: 'PostsForm'
+   form: 'CommentForm'
 })(
-  connect(mapStateToProps, { createPost, editPost, fetchPostEdit})(PostsForm)
+  connect(null, { createComment, fetchPostEdit})(CommentsForm)
 );

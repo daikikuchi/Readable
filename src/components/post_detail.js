@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comments from './comments';
+import Comments_form from './comments_form'
 import { fetchPost,deletePost,fetchPosts, upVote, downVote, getComments } from '../actions';
 import sortBy from 'sort-by';
 
@@ -69,6 +70,9 @@ class PostDetail extends Component {
              <span className="glyphicon glyphicon-remove-sign cursor"></span></li>
          </ul>
 
+       </div>
+       <div>
+         <Comments_form id={id} />
        </div>
 
        <div>

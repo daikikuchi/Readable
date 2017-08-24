@@ -1,7 +1,9 @@
 import {
   FETCH_COMMENT,
   FETCH_COMMENTS,
-  COMMENT_UP_VOTE,
+  VOTE_COMMENT,
+  CREATE_COMMENT,
+
 } from '../actions/types';
 
 
@@ -17,9 +19,23 @@ export default function (state = [], action) {
     case FETCH_COMMENT:
        return state;
 
-    case COMMENT_UP_VOTE:
-      console.log("action received" + action.payload.data.id)
-      return {...state, [action.payload.data.id]: action.payload.data}
+    case CREATE_COMMENT:
+    console.log(action.payload)
+       return state;
+
+    case VOTE_COMMENT:
+    const id = action.payload.data.parentId
+
+    return {
+      ...state,
+      [id]: state[id].map(comment => {
+        if (comment.id === action.payload.data.id) {
+          comment.voteScore = action.payload.data.voteScore
+        }
+        return comment
+      })
+    }
+
 
     default:
     return state;

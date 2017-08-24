@@ -28,7 +28,7 @@ export default function(state = {}, action) {
         return action.payload.data
 
     case CREATE_POST:
-
+       console.log(action.payload)
        return state;
 
     case EDIT_POST:
@@ -54,28 +54,8 @@ export default function(state = {}, action) {
 
      return {...state, [action.payload.data.id]: action.payload.data}
 
+
       default:
            return state;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-// in the case of using _
-//   switch (action.type) {
-//      case FETCH_POSTS:
-//        console.log('Action received', action.payload)
-//         return _.mapKeys(action.payload.data, 'id');
-//
-//         default:
-//            return state;
-//   }
-// }

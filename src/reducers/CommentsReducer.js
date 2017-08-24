@@ -8,7 +8,7 @@ import {
 
 
 export default function (state = [], action) {
-
+  console.log('Action received', action)
   switch (action.type) {
     case FETCH_COMMENTS:
       console.log("comments:" + action)
@@ -20,8 +20,17 @@ export default function (state = [], action) {
        return state;
 
     case CREATE_COMMENT:
+    const postId = action.payload.data.parentId
     console.log(action.payload)
-       return state;
+    console.log(postId)
+
+   return {
+     ...state,
+     [postId]: [
+       ...state[postId],
+       action.comment,
+     ]
+   }
 
     case VOTE_COMMENT:
     const id = action.payload.data.parentId

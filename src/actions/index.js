@@ -127,10 +127,9 @@ export function voteComment(id,option) {
   };
 }
 
-export function createComment(id,values,callback) {
+export function createComment(values,callback) {
 
-  const request = axios.post(`${ROOT_URL}/comments/${id}`, values, headers)
-      .then(() => callback());
+  const request = axios.post(`${ROOT_URL}/comments`, values, headers)
   console.log('Request:' + request)
   return {
     type: CREATE_COMMENT,

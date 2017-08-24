@@ -14,8 +14,8 @@ import {
   FETCH_COMMENT,
   FETCH_COMMENTS,
   FETCH_POST_EDIT,
-  COMMENT_UP_VOTE,
-
+  CREATE_COMMENT,
+  VOTE_COMMENT,
 
 
 } from './types';
@@ -116,17 +116,27 @@ export function downVote(id) {
   };
 }
 
-export function upVoteComment(id) {
+export function voteComment(id,option) {
 
-  const request = axios.post(`${ROOT_URL}/comments/${id}`, { option: "upVote" }, headers);
+
+  const request = axios.post(`${ROOT_URL}/comments/${id}`, { option }, headers);
   console.log(request)
   return {
-    type: COMMENT_UP_VOTE,
+    type: VOTE_COMMENT,
     payload: request
   };
 }
 
+export function createComment(id,values,callback) {
 
+  const request = axios.post(`${ROOT_URL}/comments/${id}`, values, headers)
+      .then(() => callback());
+  console.log('Request:' + request)
+  return {
+    type: CREATE_COMMENT,
+    payload: request
+    };
+}
 
 
 export function getComment(id) {

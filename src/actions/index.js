@@ -61,7 +61,7 @@ export function createPost(values, callback) {
 }
 
 export function deletePost(id, callback) {
-  const request = axios.delete(`${ROOT_URL}/posts/${id}`, headers)
+  axios.delete(`${ROOT_URL}/posts/${id}`, headers)
   .then(() => callback());
   return {
     type: DELETE_POST,
@@ -130,6 +130,7 @@ export function voteComment(id,option) {
 export function createComment(values,callback) {
 
   const request = axios.post(`${ROOT_URL}/comments`, values, headers)
+  .then(() => callback());
   console.log('Request:' + request)
   return {
     type: CREATE_COMMENT,

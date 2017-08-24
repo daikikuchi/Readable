@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { upVote, downVote, getComments, deletePost, fetchByCategory } from '../actions';
-import Categories from './categories';
 import _ from 'lodash';
 
 

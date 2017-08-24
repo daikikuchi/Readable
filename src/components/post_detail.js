@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Comments from './comments';
 import Comments_form from './comments_form'
 import { fetchPost,deletePost,fetchPosts, upVote, downVote, getComments } from '../actions';
-import sortBy from 'sort-by';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -71,7 +70,9 @@ class PostDetail extends Component {
          </ul>
 
        </div>
-       <div>
+
+       <h2>Comments</h2>
+       <div className="comment-post">
          <Comments_form id={id} />
        </div>
 

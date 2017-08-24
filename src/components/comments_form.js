@@ -18,7 +18,6 @@ class CommentsForm extends Component {
   handleInitialize() {
 
   const initData = {
-    "title": this.props.posts.title,
     "author": this.props.posts.author,
     "body": this.props.posts.body,
   };
@@ -58,9 +57,12 @@ class CommentsForm extends Component {
         });
       }
       else{
+      values['id'] = Math.random().toString(36).substr(-8)
       values['timestamp'] = new Date()
-      this.props.createComment(id,values,()=> {
-          null;
+      values['parentId'] = this.props.id;
+      console.log(this.props.id)
+      this.props.createComment(values,() => {
+         this.props.history.push('(`/${category}/${values.parentId}`')
       });
     }
     }
@@ -75,13 +77,6 @@ class CommentsForm extends Component {
      return(
        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
-            label="Title"
-            name="title"
-            type="input"
-            component={this.renderField}
-
-          />
-          <Field
             label="Author"
             name="author"
             type="input"
@@ -93,7 +88,7 @@ class CommentsForm extends Component {
             type="textarea"
             component={this.renderField}
           />
-          <button type="submit" className="btn btn-primary submit sumbmi-comment">Submit</button>
+          <button type="submit" className="btn btn-primary submit sumbmit-comment">Submit</button>
        </form>
      );
    }
@@ -103,9 +98,6 @@ function validate(values) {
 
   const errors = {};
 
- if(!values.title || values.title.length < 3) {
-   errors.title = "Enter a title that us at least 3 characters!";
- }
  if(!values.author) {
    errors.author = 'Enter an author'
  }
@@ -117,8 +109,6 @@ if(!values.body) {
  return errors;
 
 }
-
-
 
 
 export default reduxForm({

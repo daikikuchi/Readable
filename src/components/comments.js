@@ -4,22 +4,23 @@ import { Link,withRouter} from 'react-router-dom';
 import { getComments,getComment,voteComment} from '../actions';
 
 class Comments extends Component {
-  // componentDidMount() {
-  //     const {id} = this.props;
-  //     this.props.getComment(id);
-  // }
+  componentDidMount() {
+      const {id} = this.props;
+      this.props.getComment(id);
+  }
 
 
   renderComments() {
   return this.props.selectedComments.map((comment) => {
+      console.log(comment)
+      if(comment) {
       const { author,voteScore,id,body,timestamp } = comment
       const time = new Date(timestamp)
       const formatted = time.toLocaleDateString()
-
      return (
 
        <div className="read-detail" key={id}>
-           <h5 className="author-name"><span className="glyphicon glyphicon-user margin-right:10px"> {author}</span></h5>
+           <h5 className="author-name"><span className="glyphicon glyphicon-user margin-right:10px">{author}</span></h5>
            <h4>{body}</h4>
 
          <ul className="li-bundle">
@@ -32,8 +33,9 @@ class Comments extends Component {
          </ul>
        </div>
 
-
-     );
+     )} else {
+       return
+     }
   });
 }
 
@@ -47,7 +49,6 @@ console.log(this.props.selectedComments)
 
       {this.props.selectedComments
         ?<div>
-           <h2>Comments</h2>
          {this.renderComments()}
          </div>
        : <div>
@@ -59,8 +60,6 @@ console.log(this.props.selectedComments)
   )
   }
 }
-
-
 
 function mapStateToProps({ comments },ownProps) {
    console.log(comments)

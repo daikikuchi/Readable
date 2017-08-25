@@ -15,6 +15,7 @@ import {
   FETCH_COMMENTS,
   FETCH_POST_EDIT,
   CREATE_COMMENT,
+  DELETE_COMMENT,
   VOTE_COMMENT,
 
 
@@ -137,6 +138,22 @@ export function createComment(values,callback) {
     payload: request
     };
 }
+
+
+
+export function deleteComment(id,callback) {
+
+  console.log(id)
+  const request = axios.delete(`${ROOT_URL}/comments/${id}`,headers)
+
+  console.log('Request:' + request)
+  return {
+    type: DELETE_COMMENT,
+    payload: request
+    };
+}
+
+
 
 
 export function getComment(id) {

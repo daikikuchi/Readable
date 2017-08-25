@@ -10,5 +10,6 @@ export const DOWN_VOTE = "down_vote";
 export const FETCH_COMMENT = "fetch_comment"
 export const FETCH_COMMENTS = "fetch_comments";
 export const FETCH_POST_EDIT = "fetch_post_edit";
-export const CREATE_COMMENT = "create_comment"
+export const CREATE_COMMENT = "create_comment";
+export const DELETE_COMMENT = "delete_comment";
 export const VOTE_COMMENT = "VOTE_COMMENT";

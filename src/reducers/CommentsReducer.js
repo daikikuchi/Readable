@@ -3,6 +3,7 @@ import {
   FETCH_COMMENTS,
   VOTE_COMMENT,
   CREATE_COMMENT,
+  DELETE_COMMENT,
 
 } from '../actions/types';
 
@@ -20,14 +21,13 @@ export default function (state = [], action) {
        return state;
 
     case CREATE_COMMENT:
-    const postId = action.payload.data.parentId
     console.log(action.payload)
-    console.log(postId)
+    const postid = action.payload.data.parentId
 
    return {
      ...state,
-     [postId]: [
-       ...state[postId],
+     [postid]: [
+       ...state[postid],
        action.comment,
      ]
    }
@@ -44,6 +44,18 @@ export default function (state = [], action) {
         return comment
       })
     }
+
+    case DELETE_COMMENT:
+      console.log(action.payload.data)
+			const { id: commentId, parentId: pId } = action.payload.data
+
+
+    return {
+      ...state,
+      [pId]: state[pId].filter(comment => comment.id !== commentId)
+    }
+
+
 
 
     default:

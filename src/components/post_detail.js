@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comments from './comments';
 import Comments_form from './comments_form'
-import { fetchPost,deletePost,fetchPosts, upVote, downVote, getComments } from '../actions';
+import { fetchPost,deletePost,fetchPosts, upVote, downVote, getComments, } from '../actions';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -13,6 +13,8 @@ class PostDetail extends Component {
         this.props.getComments();
     }
   }
+
+
 
   postDelete(id) {
 
@@ -26,6 +28,7 @@ class PostDetail extends Component {
      })
    }
   }
+
 
   render() {
      const { post } = this.props;
@@ -73,11 +76,11 @@ class PostDetail extends Component {
 
        <h2>Comments</h2>
        <div className="comment-post">
-         <Comments_form id={id} />
+         <Comments_form id={id} category={post.category} />
        </div>
 
        <div>
-         <Comments id={id} />
+         <Comments id={id}  />
        </div>
      </div>
     </div>
@@ -93,4 +96,4 @@ function mapStateToProps({ posts, comments }, ownProps ) {
   return { post, comments };
 };
 
-export default connect(mapStateToProps, {fetchPost,deletePost,fetchPosts, upVote, downVote,getComments})(PostDetail);
+export default connect(mapStateToProps, {fetchPost,deletePost,fetchPosts, upVote, downVote,getComments,})(PostDetail);

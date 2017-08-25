@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, initialize} from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createComment, fetchPostEdit } from '../actions'
 
@@ -60,9 +60,10 @@ class CommentsForm extends Component {
       values['id'] = Math.random().toString(36).substr(-8)
       values['timestamp'] = new Date()
       values['parentId'] = this.props.id;
+
       console.log(this.props.id)
       this.props.createComment(values,() => {
-         this.props.history.push('(`/${category}/${values.parentId}`')
+         this.props.history.push('(`/${this.props.category}/${values.id}`')
       });
     }
     }

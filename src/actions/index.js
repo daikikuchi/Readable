@@ -17,6 +17,9 @@ import {
   CREATE_COMMENT,
   DELETE_COMMENT,
   VOTE_COMMENT,
+  SORT_POSTS_DATE,
+  SORT_POSTS_VOTE,
+
 
 
 } from './types';
@@ -26,12 +29,27 @@ const headers = { headers: { 'Authorization': 'Javascript' } };
 
 export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts`, headers);
-  console.log('Request:' + request)
   return {
     type: FETCH_POSTS,
     payload: request
   };
 }
+
+export function sortPosts(value) {
+  const request = axios.get(`${ROOT_URL}/posts`, headers)
+  if (value === 'date') {
+  return {
+    type: SORT_POSTS_DATE,
+    payload: request
+  }}
+  else{
+    return {
+      type: SORT_POSTS_VOTE,
+      payload: request
+    }}
+  }
+
+
 
 export function fetchPost(id) {
   const request = axios.get(`${ROOT_URL}/posts/${id}`, headers);
@@ -164,6 +182,17 @@ export function getComment(id) {
 
   };
 }
+
+// export const margeComment = (id) => {
+//   const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
+//    return {
+//       type:MARGE_COMMENT,
+//       palyload: request
+//
+//    };
+//
+// }
+
 
 
 export const getComments = function () {

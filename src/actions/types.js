@@ -13,3 +13,5 @@ export const FETCH_POST_EDIT = "fetch_post_edit";
 export const CREATE_COMMENT = "create_comment";
 export const DELETE_COMMENT = "delete_comment";
 export const VOTE_COMMENT = "VOTE_COMMENT";
+export const SORT_POSTS_DATE = "sort_posts_date";
+export const SORT_POSTS_VOTE = "sort_posts_vote";

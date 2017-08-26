@@ -3,6 +3,8 @@ import { FETCH_POSTS,
 FETCH_BY_CATEGORY,
 FETCH_POST,
 CREATE_POST,
+SORT_POSTS_DATE,
+SORT_POSTS_VOTE,
 UP_VOTE,
 DOWN_VOTE,
 EDIT_POST,
@@ -17,6 +19,15 @@ export default function(state = {}, action) {
      case FETCH_POSTS:
 
       return _.mapKeys(action.payload.data, 'id');
+
+    case SORT_POSTS_DATE:
+        const postsDate  = _.sortBy(action.payload.data, 'timestamp').reverse();
+            return _.mapKeys(postsDate, 'id')
+
+    case SORT_POSTS_VOTE:
+    const postsVote  = _.sortBy(action.payload.data, 'voteScore').reverse();
+    return _.mapKeys(postsVote, 'id')
+
 
     case FETCH_POST:
         console.log(action.payload.data)

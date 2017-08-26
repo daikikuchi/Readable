@@ -4,6 +4,7 @@ import {
   VOTE_COMMENT,
   CREATE_COMMENT,
   DELETE_COMMENT,
+  // MARGE_COMMENT,
 
 } from '../actions/types';
 
@@ -20,8 +21,12 @@ export default function (state = [], action) {
     case FETCH_COMMENT:
        return state;
 
+    // case MARGE_COMMENT:
+    //       return state;
+
     case CREATE_COMMENT:
     console.log(action.payload)
+    if(action.payload) {
     const postid = action.payload.data.parentId
 
    return {
@@ -30,7 +35,10 @@ export default function (state = [], action) {
        ...state[postid],
        action.comment,
      ]
-   }
+   } }
+  else {
+    return state
+  }
 
     case VOTE_COMMENT:
     const id = action.payload.data.parentId

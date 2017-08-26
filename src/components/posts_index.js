@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPosts, upVote, downVote, getComments, deletePost, fetchAllCategory } from '../actions';
+import { fetchPosts, upVote, downVote, getComments, deletePost, fetchAllCategory,sortPosts} from '../actions';
 import Categories from './categories';
 import _ from 'lodash';
 
@@ -42,6 +42,8 @@ class PostsIndex extends Component {
       if (!deleted) {
         return (
           <div className="read-detail" key={id}>
+            <div className="select right">
+        </div>
             <div className="edit-post">
               <span className="glyphicon glyphicon-pencil"><Link to={`/post/${id}/edit`}>edit</Link></span>
             </div>
@@ -70,6 +72,12 @@ class PostsIndex extends Component {
 
     return (
       <div className="row">
+        <select className="selectpicker show-tick"
+          onChange={ (event) => {this.props.sortPosts(event.target.value)} }>
+          <option disabled  selected="selected">Sort</option>
+          <option value="score">Top Score</option>
+          <option value="date">Most recent</option>
+        </select>
         <div className="add-post">
           <Link className="btn btn-primary navigate-button" to="/posts/new">
             Add a Post
@@ -93,9 +101,9 @@ class PostsIndex extends Component {
 
 function mapStateToProps({ posts, comments}) {
 
-  posts = _.sortBy(posts, 'voteScore').reverse();
+  // posts = _.sortBy(posts, 'voteScore').reverse();
   return { posts, comments }
 };
 
 
-export default connect(mapStateToProps, { fetchPosts, upVote, downVote, getComments, deletePost,})(PostsIndex);
+export default connect(mapStateToProps, { fetchPosts, upVote, downVote, getComments, deletePost,sortPosts})(PostsIndex);

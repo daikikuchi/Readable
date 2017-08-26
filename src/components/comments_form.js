@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, initialize} from 'redux-form';
-import { Link} from 'react-router-dom';
+import { Link,withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createComment, fetchPostEdit } from '../actions'
+import { createComment, fetchPostEdit,marge_comment } from '../actions'
 
 
 class CommentsForm extends Component {
@@ -60,10 +60,12 @@ class CommentsForm extends Component {
       values['id'] = Math.random().toString(36).substr(-8)
       values['timestamp'] = new Date()
       values['parentId'] = this.props.id;
+      const { category,id}  = this.props
+      console.log(category)
 
       console.log(this.props.id)
       this.props.createComment(values,() => {
-         this.props.history.push('(`/${this.props.category}/${values.id}`')
+         this.props.history.push('/')
       });
     }
     }
@@ -115,6 +117,4 @@ if(!values.body) {
 export default reduxForm({
    validate,
    form: 'CommentForm'
-})(
-  connect(null, { createComment, fetchPostEdit})(CommentsForm)
-);
+})(withRouter(connect(null, { createComment, fetchPostEdit})(CommentsForm)));

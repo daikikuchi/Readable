@@ -22,7 +22,6 @@ class Comments extends Component {
    }
   }
 
-
   renderComments() {
   return this.props.selectedComments.map((comment) => {
       console.log(comment)
@@ -34,6 +33,9 @@ class Comments extends Component {
      return (
 
        <div className="read-detail" key={id}>
+         <div className="edit-post">
+           <span className="glyphicon glyphicon-pencil"><Link to={`/edit/comment/${id}`}>edit</Link></span>
+         </div>
            <h5 className="author-name"><span className="glyphicon glyphicon-user margin-right:10px">{author}</span></h5>
            <h4>{body}</h4>
 
@@ -76,9 +78,7 @@ console.log(this.props.selectedComments)
 }
 
 function mapStateToProps({ comments },ownProps) {
-   console.log(comments)
   const selectedComments = (comments[ownProps.match.params.id])
-  console.log(selectedComments)
   return { selectedComments  }
 };
 

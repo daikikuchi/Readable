@@ -4,7 +4,7 @@ import PostsIndex from './components/posts_index';
 import PostsCategory from './components/posts_category';
 import PostDetail from './components/post_detail';
 import PostsForm from  './components/posts_form';
-import CommentsForm from  './components/posts_form';
+import CommentsForm from  './components/comments_form';
 
 
 
@@ -19,6 +19,7 @@ class App extends Component {
         <Switch>
          <Route exact path="/" render={() => <PostsIndex/>}/>
          <Route exact path= "/posts/new" component={PostsForm}/>
+          <Route exact path="/new/comment/:parentId" component={CommentsForm}/>
          <Route exact path="/edit/comment/:id" component={CommentsForm}/>
          <Route exact path="/post/:id/edit" component={PostsForm}/>
   	     <Route exact path="/:category/posts" component={PostsCategory}/>

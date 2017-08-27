@@ -4,70 +4,82 @@ import {
   VOTE_COMMENT,
   CREATE_COMMENT,
   DELETE_COMMENT,
-  // MARGE_COMMENT,
-
+  FETCH_COMMENT_DETAIL,
+  EDIT_COMMENT
 } from '../actions/types';
 
-
-export default function (state = [], action) {
-  console.log('Action received', action)
+export default function(state = [], action) {
+  console.log('Action received', action);
   switch (action.type) {
     case FETCH_COMMENTS:
-      console.log("comments:" + action)
+      console.log('comments:' + action);
       return Object.assign({}, state, {
         [action.postId]: action.comments
-      })
+      });
 
     case FETCH_COMMENT:
-       return state;
+      return state;
 
-    // case MARGE_COMMENT:
-    //       return state;
+    case FETCH_COMMENT_DETAIL:
+      console.log(action.payload.data);
+      if (action.payload.data) {
+        return action.payload.data;
+      } else {
+        return state;
+      }
 
     case CREATE_COMMENT:
-    console.log(action.payload)
-    if(action.payload) {
-    const postid = action.payload.data.parentId
+      console.log(action.payload);
+      if (action.payload) {
+        const postid = action.payload.data.parentId;
 
-   return {
-     ...state,
-     [postid]: [
-       ...state[postid],
-       action.comment,
-     ]
-   } }
-  else {
-    return state
-  }
+        return {
+          ...state,
+          [postid]: [...state[postid], action.comment]
+        };
+      } else {
+        return state;
+      }
+
+    case EDIT_COMMENT:
+      if (action.payload) {
+        const postId = action.payload.data.parentId;
+        return {
+          ...state,
+          [postId]: state[postId].map(comment => {
+            if (comment.id === action.payload.data.id) {
+              return action.payload.comment;
+            }
+            return comment;
+          })
+        };
+      } else {
+        return state;
+      }
 
     case VOTE_COMMENT:
-    const id = action.payload.data.parentId
+      const id = action.payload.data.parentId;
 
-    return {
-      ...state,
-      [id]: state[id].map(comment => {
-        if (comment.id === action.payload.data.id) {
-          comment.voteScore = action.payload.data.voteScore
-        }
-        return comment
-      })
-    }
+      return {
+        ...state,
+        [id]: state[id].map(comment => {
+          if (comment.id === action.payload.data.id) {
+            comment.voteScore = action.payload.data.voteScore;
+          }
+          return comment;
+        })
+      };
 
     case DELETE_COMMENT:
-      console.log(action.payload.data)
-			const { id: commentId, parentId: pId } = action.payload.data
+      console.log(action.payload.data);
+      const { id: commentId, parentId: pId } = action.payload.data;
 
-
-    return {
-      ...state,
-      [pId]: state[pId].filter(comment => comment.id !== commentId)
-    }
-
-
-
+      return {
+        ...state,
+        [pId]: state[pId].filter(comment => comment.id !== commentId)
+      };
 
     default:
-    return state;
-
+      return state;
   }
 }

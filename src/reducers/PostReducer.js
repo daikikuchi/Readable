@@ -1,72 +1,63 @@
 import _ from 'lodash';
-import { FETCH_POSTS,
-FETCH_BY_CATEGORY,
-FETCH_POST,
-CREATE_POST,
-SORT_POSTS_DATE,
-SORT_POSTS_VOTE,
-UP_VOTE,
-DOWN_VOTE,
-EDIT_POST,
-DELETE_POST,
-FETCH_POST_EDIT,
+import {
+  FETCH_POSTS,
+  FETCH_BY_CATEGORY,
+  FETCH_POST,
+  CREATE_POST,
+  SORT_POSTS_DATE,
+  SORT_POSTS_VOTE,
+  UP_VOTE,
+  DOWN_VOTE,
+  EDIT_POST,
+  DELETE_POST,
+  FETCH_POST_EDIT
 } from '../actions/types';
 
 export default function(state = {}, action) {
-
-  console.log('Action received', action)
+  console.log('Action received', action);
   switch (action.type) {
-     case FETCH_POSTS:
-
+    case FETCH_POSTS:
       return _.mapKeys(action.payload.data, 'id');
 
     case SORT_POSTS_DATE:
-        const postsDate  = _.sortBy(action.payload.data, 'timestamp').reverse();
-            return _.mapKeys(postsDate, 'id')
+      const postsDate = _.sortBy(action.payload.data, 'timestamp').reverse();
+      return _.mapKeys(postsDate, 'id');
 
     case SORT_POSTS_VOTE:
-    const postsVote  = _.sortBy(action.payload.data, 'voteScore').reverse();
-    return _.mapKeys(postsVote, 'id')
-
+      const postsVote = _.sortBy(action.payload.data, 'voteScore').reverse();
+      return _.mapKeys(postsVote, 'id');
 
     case FETCH_POST:
-        console.log(action.payload.data)
-          //  return action.payload.data
-        return { ...state, [action.payload.data.id]: action.payload.data };
+      console.log(action.payload.data);
+      //  return action.payload.data
+      return { ...state, [action.payload.data.id]: action.payload.data };
 
     case FETCH_POST_EDIT:
-         console.log(action.payload.data)
-        return action.payload.data
+      console.log(action.payload.data);
+      return action.payload.data;
 
     case CREATE_POST:
-       console.log(action.payload)
-       return state;
+      console.log(action.payload);
+      return state;
 
     case EDIT_POST:
-         console.log('Edit Action received'+ action.payload)
-         return state;
-
+      console.log('Edit Action received' + action.payload);
+      return state;
 
     case DELETE_POST:
-        return _.omit(state, action.payload);
-
+      return _.omit(state, action.payload);
 
     case FETCH_BY_CATEGORY:
-          console.log(action)
-          return action.payload.data
+      console.log(action);
+      return action.payload.data;
 
+    case UP_VOTE:
+      return { ...state, [action.payload.data.id]: action.payload.data };
 
-     case UP_VOTE:
+    case DOWN_VOTE:
+      return { ...state, [action.payload.data.id]: action.payload.data };
 
-     return {...state, [action.payload.data.id]: action.payload.data}
-
-     case DOWN_VOTE:
-
-
-     return {...state, [action.payload.data.id]: action.payload.data}
-
-
-      default:
-           return state;
+    default:
+      return state;
   }
 }

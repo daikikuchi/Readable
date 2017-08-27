@@ -13,13 +13,14 @@ import {
   FETCH_ALL_CATEGORY,
   FETCH_COMMENT,
   FETCH_COMMENTS,
+  FETCH_COMMENT_DETAIL,
   FETCH_POST_EDIT,
   CREATE_COMMENT,
+  EDIT_COMMENT,
   DELETE_COMMENT,
   VOTE_COMMENT,
   SORT_POSTS_DATE,
   SORT_POSTS_VOTE,
-
 
 
 } from './types';
@@ -29,6 +30,7 @@ const headers = { headers: { 'Authorization': 'Javascript' } };
 
 export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts`, headers);
+  console.log(request)
   return {
     type: FETCH_POSTS,
     payload: request
@@ -157,6 +159,18 @@ export function createComment(values,callback) {
     };
 }
 
+export function editComment(id,values,callback) {
+
+  const request = axios.put(`${ROOT_URL}/comments/${id}`, values, headers)
+.then(() => callback());
+  console.log('Request:' + request)
+  return {
+    type: EDIT_COMMENT,
+    payload: request
+    };
+}
+
+
 
 
 export function deleteComment(id,callback) {
@@ -178,20 +192,20 @@ export function getComment(id) {
  const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
   return {
      type:FETCH_COMMENT,
-     palyload: request
+     payload: request
 
   };
 }
 
-// export const margeComment = (id) => {
-//   const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
-//    return {
-//       type:MARGE_COMMENT,
-//       palyload: request
-//
-//    };
-//
-// }
+export function getCommentDetail(id) {
+  console.log(id)
+  const request = axios.get(`${ROOT_URL}/comments/${id}`, headers)
+  console.log(request)
+   return {
+      type:FETCH_COMMENT_DETAIL,
+      payload: request
+   };
+ }
 
 
 

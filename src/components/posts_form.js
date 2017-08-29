@@ -92,7 +92,7 @@ class PostsForm extends Component {
           Submit
         </button>
         <Link to="/" className="btn btn-danger">
-          Cancell
+          Cancel
         </Link>
       </form>
     );

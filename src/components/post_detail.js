@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import Post_404 from './post_404';
 import Comments from './comments';
 import {
   fetchPost,
@@ -43,9 +44,9 @@ class PostDetail extends Component {
       : 0
 
     if (!post) {
-      return <div>Loading...</div>
+      return <Post_404 />
     }
-
+  
     return (
       <div>
         <div className="navigate-button">

@@ -106,13 +106,15 @@ class PostsIndex extends Component {
 
     return (
       <div className="row">
-        <select className="selectpicker show-tick" onChange={(event) => {
+        <div>
+        <select className="selectpicker show-tick sort" onChange={(event) => {
           this.props.sortPosts(event.target.value)
         }}>
           <option disabled selected="selected">Sort</option>
           <option value="score">Top Score</option>
           <option value="date">Most recent</option>
         </select>
+        </div>
         <div className="add-post">
           <Link className="btn btn-primary navigate-button" to="/posts/new">
             Add a Post

@@ -27,10 +27,8 @@ class Comments extends Component {
 
   renderComments() {
     return this.props.selectedComments.map(comment => {
-      console.log(comment);
       if (comment) {
         const { author, voteScore, id, body, timestamp } = comment;
-        console.log(id);
         const time = new Date(timestamp);
         const formatted = time.toLocaleDateString();
         return (
@@ -76,8 +74,6 @@ class Comments extends Component {
   }
 
   render() {
-    console.log(this.props.selectedComments);
-
     return (
       <div>
         {this.props.selectedComments
@@ -93,7 +89,6 @@ class Comments extends Component {
 }
 
 function mapStateToProps({ comments }, ownProps) {
-  console.log(comments);
   const selectedComments = comments[ownProps.match.params.id];
   return { selectedComments };
 }

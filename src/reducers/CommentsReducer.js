@@ -9,10 +9,8 @@ import {
 } from '../actions/types';
 
 export default function(state = [], action) {
-  console.log('Action received', action);
   switch (action.type) {
     case FETCH_COMMENTS:
-      console.log('comments:' + action);
       return Object.assign({}, state, {
         [action.postId]: action.comments
       });
@@ -21,7 +19,6 @@ export default function(state = [], action) {
       return state;
 
     case FETCH_COMMENT_DETAIL:
-      console.log(action.payload.data);
       if (action.payload.data) {
         return action.payload.data;
       } else {
@@ -29,7 +26,6 @@ export default function(state = [], action) {
       }
 
     case CREATE_COMMENT:
-      console.log(action.payload);
       if (action.payload) {
         const postid = action.payload.data.parentId;
 
@@ -71,7 +67,6 @@ export default function(state = [], action) {
       };
 
     case DELETE_COMMENT:
-      console.log(action.payload.data);
       const { id: commentId, parentId: pId } = action.payload.data;
 
       return {

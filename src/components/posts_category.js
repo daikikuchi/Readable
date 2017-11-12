@@ -97,7 +97,7 @@ class PostsCategory extends Component {
           </div>
         );
       } else {
-        <h1>No Post</h1>;
+        return <h1>No Post</h1>;
       }
     });
   }

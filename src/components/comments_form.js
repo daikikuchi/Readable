@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, initialize } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createComment, editComment, getCommentDetail } from '../actions';

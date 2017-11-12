@@ -5,12 +5,20 @@ This is Readable project using React and Reducer, I built a content and comment 
 ### Dependencies
 - Please refer to package.json file. 
 
+### to run API server
+  - Clone or download this repository 
+  - run  npm install
+  - run  node server
+  
+  Endpoint should be running on port 5001
+
+
 ### To run it locally
-  - Clone or download this repository
+  - Open another tab 
   - run npm install
   - run npm start
   - Access it at http://localhost:3000/ to view the app.
-
+  
 ### App Functionality
 
 - All application state is managed by the Redux store. State-based props are mapped from the store rather than stored as component state.

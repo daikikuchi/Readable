@@ -7,6 +7,7 @@ This is Readable project using React and Reducer, I built a content and comment 
 
 ### to run API server
   - Clone or download this repository 
+  - Change directory to api-server folder
   - run  npm install
   - run  node server
   

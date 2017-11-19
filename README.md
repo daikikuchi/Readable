@@ -14,8 +14,9 @@ This is Readable project using React and Reducer, I built a content and comment 
   Endpoint should be running on port 5001
 
 
-### To run it locally
-  - Open another tab 
+### To run this project locally
+  - Please run API server first
+  - Open another tab on terminal
   - run npm install
   - run npm start
   - Access it at http://localhost:3000/ to view the app.
